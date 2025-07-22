@@ -625,6 +625,7 @@ class BaseOutputTransport(FrameProcessor):
                         self._transport.reset_watchdog()
                         yield frame
                     except asyncio.TimeoutError:
+                        logger.warning("Audio frame dropped due to timeout.")
                         self._transport.reset_watchdog()
                         # Notify the bot stopped speaking upstream if necessary.
                         await self._bot_stopped_speaking()
